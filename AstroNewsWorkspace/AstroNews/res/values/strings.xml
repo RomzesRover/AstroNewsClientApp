@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AstroNews</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="error">An error occured :(</string>
+    <string name="retry">retry</string>
+    <string name="user_agent">Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.60 Safari/537.17</string>
+	<integer name="user_timeout">10000</integer>
+	<string name="loading_more">Loading next page, please wait ...</string>
+	<string name="search">Search for all news on site ...</string>
+	<string name="searchM">Search</string>
+	<string name="searchN">I am so sorry, but we no found news with this tags, try to edit your request.</string>
+	<string-array name="MainViewerTabs">
+		<item >News</item>
+	</string-array>
+	<string-array name="SimpleNewsViewerTabs">
+		<item >News</item>
+		<item >Commetns</item>
+	</string-array>
+
+</resources>

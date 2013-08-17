@@ -10,6 +10,7 @@
         android:layout_alignParentTop="true"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/transparent"
+        android:listSelector="@android:color/transparent"
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
         android:numColumns="@integer/num_cols"

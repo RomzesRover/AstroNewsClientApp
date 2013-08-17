@@ -5,18 +5,21 @@ import java.util.Calendar;
 
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
+import org.holoeverywhere.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import android.content.Context;
 import android.os.Handler;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 
 import com.BBsRs.astronews.R;
+import com.BBsRs.astronews.URLImageParser;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -31,11 +34,23 @@ public class SimpleNewsViewerLoader {
 	DisplayImageOptions options;
 	ImageLoader imageLoader;
 	Document doc;
-	WebView webView;
+	TextView TextView;
 	final Handler handler = new Handler();
 	
 	String LOG_TAG = "SimpleNewsViewerLoader";
 	String html;
+	
+//	public  ImageGetter imgGetter = new Html.ImageGetter () {
+//        public Drawable getDrawable (String source) {
+//        	try {
+//        		  Log.i(LOG_TAG, "get image from: "+source);
+//        	      InputStream is = (InputStream) new URL(source).getContent();
+//        	      Drawable d = Drawable.createFromStream(is, source);
+//        	      return d;
+//        	    } catch (Exception e) {
+//        	      return null;
+//        	    }
+//        } };
 	
 	public SimpleNewsViewerLoader(Context context,ListView view, ProgressBar progressBar, DisplayImageOptions options,RelativeLayout errLt){
 		this.listView=view;												//gridview
@@ -44,7 +59,11 @@ public class SimpleNewsViewerLoader {
 		this.options=options;											//РЅР°СЃС‚СЂРѕР№РєРё Р·Р°РіСЂСѓР·РєРё РєР°СЂС‚РёРЅРѕРє
 		this.errLt=errLt;
 		
-		this.webView=new WebView(context);
+		this.TextView=new TextView(context);							//setting up text view
+		TextView.setPadding(10, 10, 10, 10);							//padding
+		TextView.setTextColor(context.getResources().getColor(R.color.black));	//color - black
+		TextView.setTextSize(13);
+		
 		imageLoader = ImageLoader.getInstance();
 		// Initialize ImageLoader with configuration. Do it once.
 	    imageLoader.init(ImageLoaderConfiguration.createDefault(context));
@@ -54,8 +73,11 @@ public class SimpleNewsViewerLoader {
 		final Runnable updater = new Runnable() {
 		    public void run() {
 		    	
-		    	webView.loadDataWithBaseURL(null,html,"text/html", "utf-8",null); // указываем страницу загрузки
-		    	listView.addHeaderView(webView);
+		    	//TextView.loadDataWithBaseURL(null,html,"text/html", "utf-8",null); // указываем страницу загрузки
+		    	Spanned text = Html.fromHtml (html,new URLImageParser(TextView, context), null);
+		    	TextView.setText(text);
+		    	
+		    	listView.addHeaderView(TextView);
 		    	
 		    	  String[] values = new String[] { "Android List View", 
                           "Adapter implementation",
@@ -95,7 +117,9 @@ public class SimpleNewsViewerLoader {
 					
 					html = doc.select("table").get(5).child(0).child(0).html()
 							.replaceAll("/news/", "http://www.astronews.ru/news/")
-							.replaceAll("hspace=\"40\" vspace=\"25\"", "hspace=\"0\" vspace=\"5\"");
+							.replaceAll("hspace=\"40\" vspace=\"25\"", "hspace=\"0\" vspace=\"5\"")
+							.replaceAll("<br><br><iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/", "http://www.youtube.com/watch?v=")
+							.replaceAll("\" frameborder=\"0\" allowfullscreen></iframe><br><br>", "");
 					
 					Calendar c = Calendar.getInstance(); 
 					Calendar.getInstance();
@@ -113,5 +137,5 @@ public class SimpleNewsViewerLoader {
 		
 		thr.start();
 	}
-
+	
 }

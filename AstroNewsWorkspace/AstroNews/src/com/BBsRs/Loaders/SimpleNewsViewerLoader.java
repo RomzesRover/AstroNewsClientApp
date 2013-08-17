@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
-import org.holoeverywhere.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -14,9 +13,11 @@ import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.BBsRs.astronews.R;
 import com.BBsRs.astronews.URLImageParser;
@@ -34,11 +35,12 @@ public class SimpleNewsViewerLoader {
 	DisplayImageOptions options;
 	ImageLoader imageLoader;
 	Document doc;
-	TextView TextView;
+	LayoutInflater inflater;
 	final Handler handler = new Handler();
 	
 	String LOG_TAG = "SimpleNewsViewerLoader";
 	String html;
+	
 	
 	public SimpleNewsViewerLoader(Context context,ListView view, ProgressBar progressBar, DisplayImageOptions options,RelativeLayout errLt){
 		this.listView=view;												//gridview
@@ -47,10 +49,7 @@ public class SimpleNewsViewerLoader {
 		this.options=options;											//настройки загрузки картинок
 		this.errLt=errLt;
 		
-		this.TextView=new TextView(context);							//setting up text view
-		TextView.setPadding(10, 10, 10, 10);							//padding
-		TextView.setTextColor(context.getResources().getColor(R.color.black));	//color - black
-		TextView.setTextSize(13);
+		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 		imageLoader = ImageLoader.getInstance();
 		// Initialize ImageLoader with configuration. Do it once.
@@ -61,10 +60,12 @@ public class SimpleNewsViewerLoader {
 		final Runnable updater = new Runnable() {
 		    public void run() {
 		    	
+		    	View headerView = inflater.inflate(R.layout.header_view_simple_news, null, false);	//setting up header view and update news text
+		    	TextView TextView = (TextView)headerView.findViewById(R.id.newsContent);
 		    	Spanned text = Html.fromHtml (html,new URLImageParser(TextView, context), null);
 		    	TextView.setText(text);
-		    	
-		    	listView.addHeaderView(TextView);
+		    																						//set header to list of comments
+		    	listView.addHeaderView(headerView);
 		    	
 		    	  String[] values = new String[] { "Android List View", 
                           "Adapter implementation",

@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.holoeverywhere.widget.TextView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,7 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html.ImageGetter;
 import android.util.Log;
-import android.view.View;
+import android.widget.TextView;
 
 public class URLImageParser implements ImageGetter {
     Context c;
@@ -62,9 +61,9 @@ public class URLImageParser implements ImageGetter {
         @Override 
         protected void onPostExecute(Drawable result) { 
             // set the correct bound according to the result from HTTP call 
-            Log.d("height",""+result.getIntrinsicHeight()); 
-            Log.d("width",""+result.getIntrinsicWidth()); 
-            urlDrawable.setBounds(0, 0, 0+result.getIntrinsicWidth(), 0+result.getIntrinsicHeight());  
+        	final float scale = (float) URLImageParser.this.container.getWidth() / (float) result.getIntrinsicWidth();
+        	
+            urlDrawable.setBounds(0, 0, (int)URLImageParser.this.container.getWidth(), (int)(scale * result.getIntrinsicHeight()));  
 
             // change the reference of the current drawable to the result 
             // from the HTTP call 
@@ -75,10 +74,11 @@ public class URLImageParser implements ImageGetter {
 
             // For ICS
             URLImageParser.this.container.setHeight((URLImageParser.this.container.getHeight() 
-            + result.getIntrinsicHeight()));
+            + (int)(scale * result.getIntrinsicHeight())));
 
             // Pre ICS
             URLImageParser.this.container.setEllipsize(null);
+            
         } 
 
         /***
@@ -90,8 +90,21 @@ public class URLImageParser implements ImageGetter {
             try {
                 InputStream is = fetch(urlString);
                 Drawable drawable = Drawable.createFromStream(is, "src");
-                drawable.setBounds(0, 0, 0 + drawable.getIntrinsicWidth(), 0 
-                        + drawable.getIntrinsicHeight()); 
+                
+                final float scale = (float) URLImageParser.this.container.getWidth() / (float) drawable.getIntrinsicWidth();
+                
+                Log.i("ImageLoader", "scale:"+String.valueOf(scale));
+                
+                Log.i("ImageLoader", "text Width:"+String.valueOf(URLImageParser.this.container.getWidth()));
+                Log.i("ImageLoader", "text height:"+String.valueOf(URLImageParser.this.container.getHeight()));
+                Log.i("ImageLoader", "draw width:"+String.valueOf(drawable.getIntrinsicWidth()));
+                Log.i("ImageLoader", "draw height:"+String.valueOf(drawable.getIntrinsicHeight()));
+                
+                Log.i("ImageLoader", "draw after  width:"+String.valueOf((int)URLImageParser.this.container.getWidth()));
+                Log.i("ImageLoader", "draw after  height:"+String.valueOf((int)(scale * drawable.getIntrinsicHeight())));
+                
+                
+                drawable.setBounds(0, 0,(int)URLImageParser.this.container.getWidth(), (int)(scale * drawable.getIntrinsicHeight())); 
                 return drawable;
             } catch (Exception e) {
                 return null;

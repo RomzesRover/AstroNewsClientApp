@@ -15,9 +15,7 @@
 	<string-array name="MainViewerTabs">
 		<item >News</item>
 	</string-array>
-	<string-array name="SimpleNewsViewerTabs">
-		<item >News</item>
-		<item >Commetns</item>
-	</string-array>
+	<string  name="news">News:</string >
+	<string  name="commetns">Commetns:</string >
 
 </resources>

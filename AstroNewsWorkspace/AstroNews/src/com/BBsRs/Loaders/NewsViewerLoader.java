@@ -15,6 +15,7 @@ import org.holoeverywhere.widget.ProgressBar;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import android.content.Context;
 import android.content.Intent;
@@ -96,10 +97,10 @@ public class NewsViewerLoader {
 					}
 				});
 	        													
-	        	gridView.setOnScrollListener(new OnScrollListener(){	//метод оnscrool (ловим когда пользаватель прокрутил список до самого низа)
+	        	gridView.setOnScrollListener(new OnScrollListener(){	//to impove scrool perfomance
 	      			@Override
 	      			public void onScrollStateChanged(AbsListView view, int scrollState) {
-	      				switch (scrollState) {							//����� �� ������
+	      				switch (scrollState) {							//to impove scrool perfomance
 	      				case OnScrollListener.SCROLL_STATE_IDLE:
 	      					imageLoader.resume();
 	      					break;
@@ -233,8 +234,8 @@ public class NewsViewerLoader {
 					
 					int k=0;
 					for (Element table : doc.select("table[bgcolor=C0C0C0]")) {
-					     for (Element row : table.select("tr[bgcolor=FFFFFF]")) {
-					        k++;
+							Element row = table.select("tr[bgcolor=FFFFFF]").first();
+							k++;
 					        newsBaseInfoArray.add(new NewsBaseInfoArray(
 					        		row.select("a[href]").get(1).text(),						//title
 					        		"http://www.astronews.ru/"+row.select("img").attr("src"),	//img
@@ -244,7 +245,6 @@ public class NewsViewerLoader {
 					    			"http://www.astronews.ru"+row.select("a").attr("href")								//url
 					    			));
 					        
-					     }
 					}
 						if (pageN==1){
 						settingUpAdapter(true);}

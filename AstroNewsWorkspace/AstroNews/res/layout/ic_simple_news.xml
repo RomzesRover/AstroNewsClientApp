@@ -18,7 +18,7 @@
         android:maxLines="2"
         android:text="Планеты, вращающиеся вокруг холодных звезд"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#222" />
+        android:textColor="@color/soft_black" />
 
     <ImageView
         android:id="@+id/imageSrc"

@@ -1,14 +1,14 @@
 package com.BBsRs.Loaders;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import android.content.Context;
 import android.os.Handler;
@@ -18,10 +18,14 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AbsListView.OnScrollListener;
 
+import com.BBsRs.Adapters.SimpleNewsAdapter;
+import com.BBsRs.astronews.CommentsBaseInfoArray;
 import com.BBsRs.astronews.R;
 import com.BBsRs.astronews.URLImageParser;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -43,6 +47,9 @@ public class SimpleNewsViewerLoader {
 	
 	String LOG_TAG = "SimpleNewsViewerLoader";
 	String html;
+	
+	ArrayList<CommentsBaseInfoArray> commentsBaseInfoArray = new ArrayList<CommentsBaseInfoArray>();
+	SimpleNewsAdapter  simpleNewsAdapter;
 	
 	
 	public SimpleNewsViewerLoader(Context context,ListView view, ProgressBar progressBar, DisplayImageOptions options,RelativeLayout errLt){
@@ -71,20 +78,27 @@ public class SimpleNewsViewerLoader {
 		    																						//set header to list of comments
 		    	listView.addHeaderView(headerView);
 		    	
-		    	  String[] values = new String[] { "Android List View", 
-                          "Adapter implementation",
-                          "Simple List View In Android",
-                          "Create List View Android", 
-                          "Android Example", 
-                          "List View Source Code", 
-                          "List View Array Adapter", 
-                          "Android Example List View" 
-                         };
-		    	
-		    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-		    	          android.R.layout.simple_list_item_1, android.R.id.text1, values);
-		    	
-		    	listView.setAdapter(adapter);
+		    	simpleNewsAdapter = new SimpleNewsAdapter(context, commentsBaseInfoArray, options);
+        		listView.setAdapter(simpleNewsAdapter);
+        		
+        		listView.setOnScrollListener(new OnScrollListener(){	//to impove scrool perfomance
+	      			@Override
+	      			public void onScrollStateChanged(AbsListView view, int scrollState) {
+	      				switch (scrollState) {							//to impove scrool perfomance
+	      				case OnScrollListener.SCROLL_STATE_IDLE:
+	      					imageLoader.resume();
+	      					break;
+	      				case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+	      						imageLoader.pause();
+	      					break;
+	      				case OnScrollListener.SCROLL_STATE_FLING:
+	      						imageLoader.pause();
+	      					break;
+	      			}
+	      			}
+	      			@Override
+	      			public void onScroll(AbsListView view, int firstVisibleItem,int visibleItemCount, int totalItemCount) {}
+	      		});
 		    	
 		    	progressBar.setVisibility(View.GONE);
 	        	listView.setVisibility(View.VISIBLE);
@@ -114,6 +128,16 @@ public class SimpleNewsViewerLoader {
 					Calendar.getInstance();
 					html = html.substring(0, html.indexOf("<a href=\"?data="+String.valueOf(c.get(Calendar.YEAR))));
 					html = html.substring(0, html.lastIndexOf("<br /><br />"));
+					
+					for (Element table : doc.select("table[bgcolor=FEFFD5]")){
+						commentsBaseInfoArray.add(new CommentsBaseInfoArray(
+								table.getElementsByClass("comment").text(),			//comment
+								table.select("a").last().text(),					//auo
+								"http://www.astronews.ru/"+table.select("img").first().attr("src"),			//img
+								"http://www.astronews.ru/"+table.select("a").last().attr("href"),				//auo link
+								table.select("td[width=40][align=center]").text()	//rate2
+								));
+					}
 					
 					SettingUpAdapter();
 					

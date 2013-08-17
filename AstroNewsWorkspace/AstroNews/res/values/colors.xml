@@ -7,4 +7,10 @@
      <color name="divider">#2b2c2e </color>
      <color name="black">#000</color>
      <color name="orange">#f80</color>
+     <color name="soft_black">#222</color>
+     <color name="gray">#d8d8d8</color>
+     
+     <color name="green">#0f0</color>
+     <color name="yellow">#fffc00</color>
+     <color name="red">#f00</color>
 </resources>

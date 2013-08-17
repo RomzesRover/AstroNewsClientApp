@@ -1,9 +1,9 @@
-/*Class to desc all data about news and search page!
+/*Class to desc all data about comments on simple news page!
   Include: name, img path, author's nickname, number of comments, current rating by user's, and url link to full news page
   Also here supported writeToParcel to save this data after rotate screen on all of the devices!
   Author Roman Gaitbaev writed for AstroNews.ru 
   http://vk.com/romzesrover 
-  Created: 20.07.2013 21:14*/
+  Created: 18.08.2013 00:58*/
 
 package com.BBsRs.astronews;
 
@@ -12,16 +12,15 @@ import android.os.Parcelable;
 
 public class CommentsBaseInfoArray implements Parcelable {
   
-  public String name, imgSrc,author, comments, rating, url;
+  public String Comment, Name, imgsSrc, auoLink, rate;
   
 
-  public CommentsBaseInfoArray(String _name, String _imgSrc,String _author,String _comments, String _rating, String _url) {
-	  name = _name;
-	  imgSrc = _imgSrc;
-	  author = _author;
-	  comments = _comments;
-	  rating = _rating;
-	  url=_url;
+  public CommentsBaseInfoArray(String _Comments, String _NamesDates, String _imgsSrc, String _auoLink, String _rate) {
+	  Comment = _Comments;
+	  Name = _NamesDates;
+	  imgsSrc = _imgsSrc;
+	  auoLink=_auoLink;
+	  rate=_rate;
   }
 
 
@@ -31,22 +30,20 @@ public int describeContents() {
 }
 
 private CommentsBaseInfoArray(Parcel in) {
-    name = in.readString();
-	imgSrc = in.readString();
-	author = in.readString();
-	comments = in.readString();
-	rating = in.readString();
-	url = in.readString();
+	Comment = in.readString();
+	Name= in.readString();
+	imgsSrc = in.readString();
+	auoLink = in.readString();
+	rate = in.readString();
 }
 
 @Override
 public void writeToParcel(Parcel out, int flags) {
-	 out.writeString(name);
-     out.writeString(imgSrc);
-     out.writeString(author);
-     out.writeString(comments);
-     out.writeString(rating);
-     out.writeString(url);
+	 out.writeString(Comment);
+     out.writeString(Name);
+     out.writeString(imgsSrc);
+     out.writeString(auoLink);
+     out.writeString(rate);
 }
 
 public static final Parcelable.Creator<CommentsBaseInfoArray> CREATOR = new Parcelable.Creator<CommentsBaseInfoArray>() {

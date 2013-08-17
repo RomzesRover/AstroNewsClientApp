@@ -2,6 +2,8 @@ package com.BBsRs.Loaders;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
@@ -12,6 +14,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +67,7 @@ public class SimpleNewsViewerLoader {
 		    	TextView TextView = (TextView)headerView.findViewById(R.id.newsContent);
 		    	Spanned text = Html.fromHtml (html,new URLImageParser(TextView, context), null);
 		    	TextView.setText(text);
+		    	TextView.setMovementMethod(LinkMovementMethod.getInstance());
 		    																						//set header to list of comments
 		    	listView.addHeaderView(headerView);
 		    	
@@ -104,14 +108,12 @@ public class SimpleNewsViewerLoader {
 								.get();
 					
 					html = doc.select("table").get(5).child(0).child(0).html()
-							.replaceAll("/news/", "http://www.astronews.ru/news/")
-							.replaceAll("hspace=\"40\" vspace=\"25\"", "hspace=\"0\" vspace=\"5\"")
-							.replaceAll("<br><br><iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/", "http://www.youtube.com/watch?v=")
-							.replaceAll("\" frameborder=\"0\" allowfullscreen></iframe><br><br>", "");
+							.replaceAll("/news/", "http://www.astronews.ru/news/");
 					
 					Calendar c = Calendar.getInstance(); 
 					Calendar.getInstance();
 					html = html.substring(0, html.indexOf("<a href=\"?data="+String.valueOf(c.get(Calendar.YEAR))));
+					html = html.substring(0, html.lastIndexOf("<br /><br />"));
 					
 					SettingUpAdapter();
 					

@@ -61,7 +61,8 @@ public class URLImageParser implements ImageGetter {
         @Override 
         protected void onPostExecute(Drawable result) { 
             // set the correct bound according to the result from HTTP call 
-        	final float scale = (float) URLImageParser.this.container.getWidth() / (float) result.getIntrinsicWidth();
+        	float scale = (float) URLImageParser.this.container.getWidth() / (float) result.getIntrinsicWidth();
+        	if (scale == 0) scale = 1;
         	
             urlDrawable.setBounds(0, 0, (int)URLImageParser.this.container.getWidth(), (int)(scale * result.getIntrinsicHeight()));  
 
@@ -91,18 +92,8 @@ public class URLImageParser implements ImageGetter {
                 InputStream is = fetch(urlString);
                 Drawable drawable = Drawable.createFromStream(is, "src");
                 
-                final float scale = (float) URLImageParser.this.container.getWidth() / (float) drawable.getIntrinsicWidth();
-                
-                Log.i("ImageLoader", "scale:"+String.valueOf(scale));
-                
-                Log.i("ImageLoader", "text Width:"+String.valueOf(URLImageParser.this.container.getWidth()));
-                Log.i("ImageLoader", "text height:"+String.valueOf(URLImageParser.this.container.getHeight()));
-                Log.i("ImageLoader", "draw width:"+String.valueOf(drawable.getIntrinsicWidth()));
-                Log.i("ImageLoader", "draw height:"+String.valueOf(drawable.getIntrinsicHeight()));
-                
-                Log.i("ImageLoader", "draw after  width:"+String.valueOf((int)URLImageParser.this.container.getWidth()));
-                Log.i("ImageLoader", "draw after  height:"+String.valueOf((int)(scale * drawable.getIntrinsicHeight())));
-                
+                float scale = (float) URLImageParser.this.container.getWidth() / (float) drawable.getIntrinsicWidth();
+                if (scale == 0) scale = 1;
                 
                 drawable.setBounds(0, 0,(int)URLImageParser.this.container.getWidth(), (int)(scale * drawable.getIntrinsicHeight())); 
                 return drawable;

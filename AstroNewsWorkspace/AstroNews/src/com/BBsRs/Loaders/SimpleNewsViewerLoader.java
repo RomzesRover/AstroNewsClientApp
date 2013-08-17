@@ -40,18 +40,6 @@ public class SimpleNewsViewerLoader {
 	String LOG_TAG = "SimpleNewsViewerLoader";
 	String html;
 	
-//	public  ImageGetter imgGetter = new Html.ImageGetter () {
-//        public Drawable getDrawable (String source) {
-//        	try {
-//        		  Log.i(LOG_TAG, "get image from: "+source);
-//        	      InputStream is = (InputStream) new URL(source).getContent();
-//        	      Drawable d = Drawable.createFromStream(is, source);
-//        	      return d;
-//        	    } catch (Exception e) {
-//        	      return null;
-//        	    }
-//        } };
-	
 	public SimpleNewsViewerLoader(Context context,ListView view, ProgressBar progressBar, DisplayImageOptions options,RelativeLayout errLt){
 		this.listView=view;												//gridview
 		this.context=context;											//context
@@ -73,7 +61,6 @@ public class SimpleNewsViewerLoader {
 		final Runnable updater = new Runnable() {
 		    public void run() {
 		    	
-		    	//TextView.loadDataWithBaseURL(null,html,"text/html", "utf-8",null); // указываем страницу загрузки
 		    	Spanned text = Html.fromHtml (html,new URLImageParser(TextView, context), null);
 		    	TextView.setText(text);
 		    	

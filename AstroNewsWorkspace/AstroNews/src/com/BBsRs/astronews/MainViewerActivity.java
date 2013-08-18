@@ -52,7 +52,7 @@ public class MainViewerActivity extends Activity implements ActionBar.OnNavigati
 	    setContentView(R.layout.activity_main_viewer);
 	    final ActionBar ab = getSupportActionBar();
 	    ab.setTitle("");
-		//ab.setLogo(getResources().getDrawable(R.drawable.ic_launcher));			//setting up normal icon (for miui and others ui)
+		ab.setLogo(getResources().getDrawable(R.drawable.ic_launcher));			//setting up normal icon (for miui and others ui)
 		
 		mLocations = getResources().getStringArray(R.array.MainViewerTabs);
 

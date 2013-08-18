@@ -258,6 +258,11 @@ public class NewsViewerLoader {
 					Log.e(LOG_TAG, "Page: "+String.valueOf(pageN));
 					e.printStackTrace();
 				}
+	        	  catch (Exception e) {
+					Error();
+					Log.e(LOG_TAG, "Page: "+String.valueOf(pageN));
+					e.printStackTrace();
+				}
 	        }
 	    });
 		

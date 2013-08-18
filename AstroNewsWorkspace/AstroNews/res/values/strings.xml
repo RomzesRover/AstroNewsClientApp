@@ -17,5 +17,6 @@
 	</string-array>
 	<string  name="news">News:</string >
 	<string  name="commetns">Commetns:</string >
+	<string  name="share">Share</string >
 
 </resources>

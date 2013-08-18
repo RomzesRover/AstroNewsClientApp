@@ -2598,6 +2598,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int listContainer=0x7f070081;
         public static final int listMode=0x7f070002;
         public static final int list_footer=0x7f070098;
+        public static final int menu_share=0x7f0700a8;
         public static final int message=0x7f07006a;
         public static final int middle=0x7f070028;
         public static final int minute=0x7f0700a5;
@@ -2774,6 +2775,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class menu {
         public static final int loader=0x7f0f0000;
+        public static final int menu_activity_simple_news_viewer=0x7f0f0001;
     }
     public static final class raw {
         public static final int roboto_bold=0x7f060000;
@@ -2860,6 +2862,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int search=0x7f0c0035;
         public static final int searchM=0x7f0c0036;
         public static final int searchN=0x7f0c0037;
+        public static final int share=0x7f0c003a;
         public static final int skip_button_label=0x7f0c0026;
         public static final int time_picker_decrement_hour_button=0x7f0c0027;
         public static final int time_picker_decrement_minute_button=0x7f0c0028;

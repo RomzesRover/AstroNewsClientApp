@@ -3,6 +3,7 @@ package com.BBsRs.Loaders;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
 import org.jsoup.Jsoup;
@@ -44,7 +45,9 @@ public class SimpleNewsViewerLoader {
 	final Handler handler = new Handler();
 	
 	String LOG_TAG = "SimpleNewsViewerLoader";
-	String html;
+	String html, url="";
+	
+	int error=0;
 	
 	ArrayList<CommentsBaseInfoArray> commentsBaseInfoArray = new ArrayList<CommentsBaseInfoArray>();
 	SimpleNewsAdapter  simpleNewsAdapter;
@@ -118,6 +121,7 @@ public class SimpleNewsViewerLoader {
 	}
 	
 	public void LoadSimpleNews(final String url){
+		this.url=url;
 		thr=new Thread(new Runnable() {				//Делаем в новом потоке
 	        public void run() {
 	        	try {
@@ -163,6 +167,7 @@ public class SimpleNewsViewerLoader {
 					
 					imageLoader.resume();
 				} catch (IOException e) {
+					Error();
 					Log.e(LOG_TAG, "Page: "+url);
 					e.printStackTrace();
 				}
@@ -170,6 +175,38 @@ public class SimpleNewsViewerLoader {
 	    });
 		
 		thr.start();
+	}
+	
+	public void Error(){ //Ошибка при загрузке
+		final Runnable updater = new Runnable() {
+	    public void run() {
+	    	error=1;
+	    	errLt.setVisibility(View.VISIBLE);
+	    	listView.setVisibility(View.GONE);
+	    	progressBar.setVisibility(View.GONE);
+	    	//кнопка попробовать снова
+	    	Button retry = (Button)errLt.findViewById(R.id.retry);
+	    	retry.setOnClickListener(new View.OnClickListener() {
+	    		@Override
+	    		public void onClick(View v) {
+	    			retry();
+	    		}
+	    	});
+	        }
+		};
+		handler.post(updater);
+	}
+	
+	public void retry(){
+		final Runnable updater = new Runnable() {
+	    public void run() {
+	    	error=0;
+	    	errLt.setVisibility(View.GONE);
+	    	listView.setVisibility(View.GONE);
+	    	progressBar.setVisibility(View.VISIBLE);
+	    	LoadSimpleNews(url);
+	    }};
+		handler.post(updater);
 	}
 	
 	public ArrayList<CommentsBaseInfoArray>  returnStringArray(){

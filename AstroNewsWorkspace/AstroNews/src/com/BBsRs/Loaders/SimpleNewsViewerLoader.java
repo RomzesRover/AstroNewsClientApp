@@ -2,7 +2,6 @@ package com.BBsRs.Loaders;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
@@ -19,10 +18,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AbsListView.OnScrollListener;
 
 import com.BBsRs.Adapters.SimpleNewsAdapter;
 import com.BBsRs.astronews.CommentsBaseInfoArray;
@@ -64,6 +62,18 @@ public class SimpleNewsViewerLoader {
 		imageLoader = ImageLoader.getInstance();
 		// Initialize ImageLoader with configuration. Do it once.
 	    imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+	}
+	
+	public void  settingUpStringArray(ArrayList<CommentsBaseInfoArray> commentsBaseInfoArray, String html,int posX){
+		this.commentsBaseInfoArray=commentsBaseInfoArray;
+		this.html=html;
+		
+		int index = listView.getFirstVisiblePosition();
+        View v = listView.getChildAt(0);
+        int top = (v == null) ? 0 : v.getTop();
+		SettingUpAdapter();
+		listView.setSelectionFromTop(index, top);
+		listView.setSelection(posX);
 	}
 	
 	public void SettingUpAdapter(){
@@ -122,12 +132,22 @@ public class SimpleNewsViewerLoader {
 								.get();
 					
 					html = doc.select("table").get(5).child(0).child(0).html()
-							.replaceAll("/news/", "http://www.astronews.ru/news/");
+							.replaceAll("/news/", "http://www.astronews.ru/news/")
+							.replaceAll("/foto/", "http://www.astronews.ru/foto/");
 					
-					Calendar c = Calendar.getInstance(); 
-					Calendar.getInstance();
-					html = html.substring(0, html.indexOf("<a href=\"?data="+String.valueOf(c.get(Calendar.YEAR))));
+					try {
+					html = html.substring(0, html.indexOf("<a href=\"?data="));
+					} catch (Exception e) {
+						Log.e(LOG_TAG, "Page: "+url + " can't cut links");
+						e.printStackTrace();
+					}
+					
+					try {
 					html = html.substring(0, html.lastIndexOf("<br /><br />"));
+					} catch (Exception e) {
+						Log.e(LOG_TAG, "Page: "+url+ " can't cut enters");
+						e.printStackTrace();
+					}
 					
 					for (Element table : doc.select("table[bgcolor=FEFFD5]")){
 						commentsBaseInfoArray.add(new CommentsBaseInfoArray(
@@ -150,6 +170,18 @@ public class SimpleNewsViewerLoader {
 	    });
 		
 		thr.start();
+	}
+	
+	public ArrayList<CommentsBaseInfoArray>  returnStringArray(){
+		return commentsBaseInfoArray;
+	}
+	
+	public int  returnPosX(){
+		return  listView.getFirstVisiblePosition();
+	}
+	
+	public String returnHtml(){
+		return html;
 	}
 	
 }

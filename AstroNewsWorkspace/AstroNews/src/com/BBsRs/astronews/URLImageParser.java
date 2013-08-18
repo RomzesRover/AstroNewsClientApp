@@ -98,6 +98,20 @@ public class URLImageParser implements ImageGetter {
                 drawable.setBounds(0, 0,(int)URLImageParser.this.container.getWidth(), (int)(scale * drawable.getIntrinsicHeight())); 
                 return drawable;
             } catch (Exception e) {
+            	try {
+					Drawable d =Drawable.createFromStream(c.getAssets().open("error.png"), null);
+					Log.i("URLImageParser", "error png loaded");
+					
+					float scale = (float) URLImageParser.this.container.getWidth() / (float) d.getIntrinsicWidth();
+	                if (scale == 0) scale = 1;
+	                d.setBounds(0, 0,(int)URLImageParser.this.container.getWidth(), (int)(scale * d.getIntrinsicHeight())); 
+					return d;
+				} catch (IOException e1) {
+					Log.e("URLImageParser", "Unexcepted error");
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	
                 return null;
             } 
         }

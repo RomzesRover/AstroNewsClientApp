@@ -23,8 +23,9 @@ public class SimpleNewsViewerActivity extends Activity {
 	ProgressBar progressBar;
 	DisplayImageOptions options ;
 	SharedPreferences sPref; 
-	ArrayList<NewsBaseInfoArray> newsBaseInfoArray = new ArrayList<NewsBaseInfoArray>();
-	int page=1,posX=0;
+	ArrayList<CommentsBaseInfoArray> commentsBaseInfoArray = new ArrayList<CommentsBaseInfoArray>();
+	String html;
+	int posX=0;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -47,20 +48,27 @@ public class SimpleNewsViewerActivity extends Activity {
         listView = (ListView)findViewById(R.id.NewsListView);
 	    progressBar = (ProgressBar)findViewById(R.id.NewsProgressBar);
 	    simpleNewsViewerLoader = new SimpleNewsViewerLoader(getApplicationContext(), listView, progressBar, options,errLt);
-	    simpleNewsViewerLoader.LoadSimpleNews(data.toString());
 	    
-//	    if(savedInstanceState == null || !savedInstanceState.containsKey("newsBaseInfoArray")) {
-//	    	
-//	    }
-//	    else{
-//	    	newsBaseInfoArray = savedInstanceState.getParcelableArrayList("newsBaseInfoArray");
-//	    	page=savedInstanceState.getInt("page");
-//	    	posX=savedInstanceState.getInt("posX");
-//	    	//if (!(newsBaseInfoArray.size()<1))
-//	    		//simpleNewsViewerLoader.settingUpStringArray(newsBaseInfoArray, page,posX,savedInstanceState.getInt("error"));
-//	    	//else 
-//	    		simpleNewsViewerLoader.LoadSimpleNews(data.toString());	
-//	    }
+	    if(savedInstanceState == null || !savedInstanceState.containsKey("commentsBaseInfoArray")) {
+	    	simpleNewsViewerLoader.LoadSimpleNews(data.toString());
+	    }
+	    else{
+	    	commentsBaseInfoArray = savedInstanceState.getParcelableArrayList("commentsBaseInfoArray");
+	    	html=savedInstanceState.getString("html");
+	    	posX=savedInstanceState.getInt("posX");
+	    	if (!(commentsBaseInfoArray.size()<1))
+	    		simpleNewsViewerLoader.settingUpStringArray(commentsBaseInfoArray, html,posX);
+	    	else 
+	    		simpleNewsViewerLoader.LoadSimpleNews(data.toString());	
+	    }
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		 outState.putParcelableArrayList("commentsBaseInfoArray", simpleNewsViewerLoader.returnStringArray());
+		 outState.putString("html", simpleNewsViewerLoader.returnHtml());
+		 outState.putInt("posX",  simpleNewsViewerLoader.returnPosX());
 	}
 	
 	@Override

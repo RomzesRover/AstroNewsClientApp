@@ -15,8 +15,11 @@
 	<string-array name="MainViewerTabs">
 		<item >News</item>
 	</string-array>
+	<string name="user">User:</string>
 	<string  name="news">News:</string >
 	<string  name="commetns">Commetns:</string >
 	<string  name="share">Share</string >
 
+	<string  name="replace_ru_one">Пользователь</string >
+	
 </resources>

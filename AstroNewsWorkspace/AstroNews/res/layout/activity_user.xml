@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <RelativeLayout
+    android:id="@+id/RelativeErrorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/error"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/buttonReconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_centerHorizontal="true"
+            android:text="@string/retry" />
+
+    </RelativeLayout>
+<ProgressBar
+      android:id="@+id/progressBar1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true" />
+
+    <RelativeLayout
+        android:id="@+id/UserRlLt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" >
+        
+  <ImageView
+      android:id="@+id/avatarSrc"
+      android:layout_width="match_parent"
+      android:layout_height="160dp"
+      android:scaleType="centerCrop"
+      android:src="#f1f1f1" />
+
+  <ImageView
+      android:id="@+id/imageView1"
+      android:layout_width="match_parent"
+      android:layout_height="10dp"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/avatarSrc"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_shadow_top" />
+
+  <ScrollView
+      android:id="@+id/scrollView1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/avatarSrc"
+      android:cacheColorHint="@android:color/transparent"
+        	android:fadingEdge="none"
+       android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+      android:layout_marginLeft="6dp"
+      android:layout_marginRight="6dp" >
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+           >
+
+          <TextView
+              android:id="@+id/UserName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:textColor="#000"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:id="@+id/UserInfo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/UserName"
+              android:layout_marginBottom="3dp"
+              android:layout_marginTop="3dp"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:textColor="#333"
+              android:textSize="16sp" />
+
+          <ImageView
+              android:id="@+id/imageView2"
+              android:layout_width="match_parent"
+              android:layout_height="2.5dp"
+              android:layout_alignBottom="@+id/UserName"
+              android:layout_alignLeft="@+id/UserName"
+              android:layout_alignRight="@+id/UserName"
+              android:background="@color/blue" />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/UserInfo"
+              android:layout_marginLeft="25dp"
+              android:layout_marginRight="25dp"
+              android:gravity="center"
+              android:orientation="vertical" >
+
+
+          </LinearLayout>
+
+      </RelativeLayout>
+  </ScrollView>
+
+    </RelativeLayout>
+    
+</RelativeLayout>

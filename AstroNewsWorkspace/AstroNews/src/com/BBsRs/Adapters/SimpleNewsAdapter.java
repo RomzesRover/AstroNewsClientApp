@@ -75,7 +75,7 @@ public class SimpleNewsAdapter extends BaseAdapter  {
 	        holder.imageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					context.startActivity(new Intent("com.BBsRs.clipiki.ru.UserViewer", Uri.parse(p.auoLink)));
+					context.startActivity(new Intent("com.BBsRs.astronews.UserViewer", Uri.parse(p.auoLink)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 				}
 			});
 	        

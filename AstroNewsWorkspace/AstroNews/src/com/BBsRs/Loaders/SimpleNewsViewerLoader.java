@@ -59,7 +59,7 @@ public class SimpleNewsViewerLoader {
 		this.listView=view;												//gridview
 		this.context=context;											//context
 		this.progressBar=progressBar;									//progressBar
-		this.options=options;											//настройки загрузки картинок
+		this.options=options;											//ÐœÐ°ÑÑÑÐŸÐ¹ÐºÐž Ð·Ð°Ð³ÑÑÐ·ÐºÐž ÐºÐ°ÑÑÐžÐœÐŸÐº
 		this.errLt=errLt;
 		this.ab=ab;
 		
@@ -130,7 +130,7 @@ public class SimpleNewsViewerLoader {
 	
 	public void LoadSimpleNews(final String url){
 		this.url=url;
-		thr=new Thread(new Runnable() {				//������ � ����� ������
+		thr=new Thread(new Runnable() {				//Äåëàåì â íîâîì ïîòîêå
 	        public void run() {
 	        	try {
 	        		imageLoader.pause();			//pause to kill lags
@@ -198,14 +198,14 @@ public class SimpleNewsViewerLoader {
 		thr.start();
 	}
 	
-	public void Error(){ //������ ��� ��������
+	public void Error(){ //Îøèáêà ïðè çàãðóçêå
 		final Runnable updater = new Runnable() {
 	    public void run() {
 	    	error=1;
 	    	errLt.setVisibility(View.VISIBLE);
 	    	listView.setVisibility(View.GONE);
 	    	progressBar.setVisibility(View.GONE);
-	    	//������ ����������� �����
+	    	//êíîïêà ïîïðîáîâàòü ñíîâà
 	    	Button retry = (Button)errLt.findViewById(R.id.retry);
 	    	retry.setOnClickListener(new View.OnClickListener() {
 	    		@Override

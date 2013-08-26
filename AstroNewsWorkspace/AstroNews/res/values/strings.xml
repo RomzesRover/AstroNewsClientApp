@@ -13,6 +13,7 @@
 	<string name="searchM">Search</string>
 	<string name="searchN">I am so sorry, but we no found news with this tags, try to edit your request.</string>
 	<string-array name="MainViewerTabs">
+	    <item >Sections</item>
 		<item >News</item>
 	</string-array>
 	<string name="user">User:</string>

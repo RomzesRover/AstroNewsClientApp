@@ -4,7 +4,7 @@
  * aapt tool from the resource data it found.  It
  * should not be modified by hand.
  */
-package org.holoeverywhere;
+package com.slidingmenu.lib;
 
 public final class R {
 	public static final class anim {
@@ -52,6 +52,9 @@ public final class R {
 		public static final int background = 0x7f010002;
 		public static final int backgroundSplit = 0x7f010003;
 		public static final int backgroundStacked = 0x7f01004e;
+		public static final int behindOffset = 0x7f010100;
+		public static final int behindScrollScale = 0x7f010102;
+		public static final int behindWidth = 0x7f010101;
 		public static final int borderBottom = 0x7f0100b2;
 		public static final int borderLeft = 0x7f0100b3;
 		public static final int borderRight = 0x7f0100b4;
@@ -102,6 +105,8 @@ public final class R {
 		public static final int entries = 0x7f0100c1;
 		public static final int entryValues = 0x7f0100c2;
 		public static final int expandActivityOverflowButtonDrawable = 0x7f01005e;
+		public static final int fadeDegree = 0x7f010108;
+		public static final int fadeEnabled = 0x7f010107;
 		public static final int fastScrollOverlayPosition = 0x7f0100e2;
 		public static final int fastScrollPreviewBackgroundLeft = 0x7f0100e0;
 		public static final int fastScrollPreviewBackgroundRight = 0x7f0100df;
@@ -152,6 +157,7 @@ public final class R {
 		public static final int min = 0x7f0100c7;
 		public static final int minDate = 0x7f0100e7;
 		public static final int modalBackgroundWrapper = 0x7f01008a;
+		public static final int mode = 0x7f0100fd;
 		public static final int multiChoiceItemLayout = 0x7f010098;
 		public static final int navigationMode = 0x7f010048;
 		public static final int negativeButtonText = 0x7f0100bd;
@@ -203,6 +209,10 @@ public final class R {
 		public static final int selectionDivider = 0x7f0100d5;
 		public static final int selectionDividerHeight = 0x7f0100d6;
 		public static final int selectionDividersDistance = 0x7f0100d7;
+		public static final int selectorDrawable = 0x7f01010a;
+		public static final int selectorEnabled = 0x7f010109;
+		public static final int shadowDrawable = 0x7f010105;
+		public static final int shadowWidth = 0x7f010106;
 		public static final int shouldDisableView = 0x7f0100aa;
 		public static final int showDefault = 0x7f0100c4;
 		public static final int showDividers = 0x7f0100ca;
@@ -254,9 +264,13 @@ public final class R {
 		public static final int toggleWhenClick = 0x7f0100fc;
 		public static final int topBright = 0x7f010092;
 		public static final int topDark = 0x7f01008e;
+		public static final int touchModeAbove = 0x7f010103;
+		public static final int touchModeBehind = 0x7f010104;
 		public static final int track = 0x7f0100f4;
 		public static final int unfocusedMonthDateColor = 0x7f0100ec;
 		public static final int verticalDivider = 0x7f010057;
+		public static final int viewAbove = 0x7f0100fe;
+		public static final int viewBehind = 0x7f0100ff;
 		public static final int virtualButtonPressedDrawable = 0x7f0100d4;
 		public static final int weekDayTextAppearance = 0x7f0100f0;
 		public static final int weekNumberColor = 0x7f0100ed;
@@ -378,6 +392,7 @@ public final class R {
 		public static final int fastscroll_overlay_size = 0x7f0a0026;
 		public static final int fastscroll_thumb_height = 0x7f0a0025;
 		public static final int fastscroll_thumb_width = 0x7f0a0024;
+		public static final int list_padding = 0x7f0a0028;
 		public static final int preference_breadcrumb_paddingLeft = 0x7f0a001e;
 		public static final int preference_breadcrumb_paddingRight = 0x7f0a001f;
 		public static final int preference_child_padding_side = 0x7f0a0015;
@@ -393,6 +408,8 @@ public final class R {
 		public static final int preference_screen_side_margin_negative = 0x7f0a0018;
 		public static final int preference_screen_top_margin = 0x7f0a0019;
 		public static final int preference_widget_width = 0x7f0a001b;
+		public static final int shadow_width = 0x7f0a0029;
+		public static final int slidingmenu_offset = 0x7f0a0027;
 	}
 	public static final class drawable {
 		public static final int abs__ab_bottom_solid_dark_holo = 0x7f020000;
@@ -905,6 +922,7 @@ public final class R {
 		public static final int fill_horizontal = 0x7f070017;
 		public static final int fill_vertical = 0x7f070015;
 		public static final int floating = 0x7f07002b;
+		public static final int fullscreen = 0x7f070037;
 		public static final int headers = 0x7f0700a3;
 		public static final int homeAsUp = 0x7f070006;
 		public static final int hour = 0x7f0700b3;
@@ -918,6 +936,7 @@ public final class R {
 		public static final int listContainer = 0x7f07008e;
 		public static final int listMode = 0x7f070002;
 		public static final int list_footer = 0x7f0700a4;
+		public static final int margin = 0x7f070036;
 		public static final int message = 0x7f070077;
 		public static final int middle = 0x7f070028;
 		public static final int minute = 0x7f0700b5;
@@ -947,11 +966,13 @@ public final class R {
 		public static final int secondaryProgress = 0x7f07002e;
 		public static final int seekbar = 0x7f0700a2;
 		public static final int select_dialog_listview = 0x7f0700b0;
+		public static final int selected_view = 0x7f070038;
 		public static final int shortcut = 0x7f07009b;
 		public static final int showCustom = 0x7f070008;
 		public static final int showHome = 0x7f070005;
 		public static final int showTitle = 0x7f070007;
 		public static final int skip_button = 0x7f0700a9;
+		public static final int slidingmenumain = 0x7f0700b1;
 		public static final int start = 0x7f07001c;
 		public static final int summary = 0x7f07009f;
 		public static final int switchWidget = 0x7f0700ac;
@@ -979,6 +1000,7 @@ public final class R {
 		public static final int config_longAnimTime = 0x7f0b0005;
 		public static final int config_mediumAnimTime = 0x7f0b0004;
 		public static final int config_shortAnimTime = 0x7f0b0003;
+		public static final int num_cols = 0x7f0b000a;
 		public static final int preference_fragment_scrollbarStyle = 0x7f0b0007;
 		public static final int preference_screen_header_scrollbarStyle = 0x7f0b0006;
 		public static final int preferences_left_pane_weight = 0x7f0b0008;
@@ -1067,6 +1089,7 @@ public final class R {
 		public static final int simple_list_item_single_choice = 0x7f030056;
 		public static final int simple_spinner_dropdown_item = 0x7f030057;
 		public static final int simple_spinner_item = 0x7f030058;
+		public static final int slidingmenumain = 0x7f030059;
 		public static final int time_picker_dialog = 0x7f03005a;
 		public static final int time_picker_holo = 0x7f03005b;
 	}
@@ -1716,6 +1739,21 @@ public final class R {
 		public static final int SherlockTheme_windowSplitActionBar = 63;
 		public static final int[] SherlockView = { 0x010100da };
 		public static final int SherlockView_android_focusable = 0;
+		public static final int[] SlidingMenu = { 0x7f0100fd, 0x7f0100fe, 0x7f0100ff, 0x7f010100, 0x7f010101, 0x7f010102, 0x7f010103, 0x7f010104, 0x7f010105, 0x7f010106, 0x7f010107, 0x7f010108, 0x7f010109, 0x7f01010a };
+		public static final int SlidingMenu_behindOffset = 3;
+		public static final int SlidingMenu_behindScrollScale = 5;
+		public static final int SlidingMenu_behindWidth = 4;
+		public static final int SlidingMenu_fadeDegree = 11;
+		public static final int SlidingMenu_fadeEnabled = 10;
+		public static final int SlidingMenu_mode = 0;
+		public static final int SlidingMenu_selectorDrawable = 13;
+		public static final int SlidingMenu_selectorEnabled = 12;
+		public static final int SlidingMenu_shadowDrawable = 8;
+		public static final int SlidingMenu_shadowWidth = 9;
+		public static final int SlidingMenu_touchModeAbove = 6;
+		public static final int SlidingMenu_touchModeBehind = 7;
+		public static final int SlidingMenu_viewAbove = 1;
+		public static final int SlidingMenu_viewBehind = 2;
 		public static final int[] Spinner = { 0x010100af, 0x01010175, 0x01010176, 0x0101017b, 0x01010262, 0x7f0100cd, 0x7f0100ce, 0x7f0100cf, 0x7f0100d0, 0x7f0100d1 };
 		public static final int Spinner_android_dropDownSelector = 1;
 		public static final int Spinner_android_dropDownWidth = 4;

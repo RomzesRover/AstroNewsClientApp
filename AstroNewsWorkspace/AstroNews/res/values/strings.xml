@@ -13,8 +13,14 @@
 	<string name="searchM">Search</string>
 	<string name="searchN">I am so sorry, but we no found news with this tags, try to edit your request.</string>
 	<string-array name="MainViewerTabs">
-	    <item >Sections</item>
+	    <item >SECTIONS</item>
 		<item >News</item>
+		<item >Questions</item>
+		<item >ME</item>
+		<item >RomzesRover</item>
+		<item >APPLICATION</item>
+		<item >Settings</item>
+		<item >About</item>
 	</string-array>
 	<string name="user">User:</string>
 	<string  name="news">News:</string >
@@ -22,5 +28,17 @@
 	<string  name="share">Share</string >
 
 	<string  name="replace_ru_one">Пользователь</string >
+	
+	<string-array name="MainSlidingMenuImgs">
+        <item></item>
+         <item>@drawable/ic_sl_menu_news</item>
+         <item>@drawable/ic_sl_menu_questions</item>
+         <item></item>
+         <item>@drawable/ic_sl_menu_my_profile</item>
+         <item></item>
+	        <item>@drawable/ic_sl_menu_settings</item>
+	        <item>@drawable/ic_sl_menu_about</item>
+    </string-array>
+	
 	
 </resources>

@@ -69,7 +69,7 @@ public class MenuFragment extends ListFragment {
 	public void onListItemClick(ListView lv, View v, int position, long id) {
 		Fragment newContent = null;
 
-		if ((position!=0) && (position!=2) && (position!=4)&& (position!=19)){
+		if ((position!=0) && (position!=3) && (position!=5)){
 		adapter.onSetChecked(position, currentSelected);
 		currentSelected=position;
 		}

@@ -21,17 +21,17 @@ public class SlidingMenuAdapter extends ArrayAdapter<String> {
 	    String[] names;
 	    boolean[] checked;
 	    boolean f1;
-	    //TypedArray imgs;
+	    TypedArray imgs;
 	    public SlidingMenuAdapter(Context context,  String[] names, boolean[] checked) {
 	        super(context, R.layout.row, names);
 	        this.context = context;
 	        this.names=names;
 	        this.checked=checked;
-	        //imgs = context.getResources().obtainTypedArray(R.array.MainViewerTabs);
+	        imgs = context.getResources().obtainTypedArray(R.array.MainSlidingMenuImgs);
 	    }
 	    @Override
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	if ((position!=0) && (position!=2) && (position!=4)&& (position!=19)){
+	    	if ((position!=0) && (position!=3) && (position!=5)){
 	        LayoutInflater inflater = (LayoutInflater) context
 	                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	        View rowView = inflater.inflate(R.layout.row, parent, false);
@@ -39,7 +39,7 @@ public class SlidingMenuAdapter extends ArrayAdapter<String> {
 	        ImageView imageView = (ImageView)rowView.findViewById(R.id.row_icon);
 	        
 	        textName.setText(names[position]);					//������ �����
-        	//imageView.setBackgroundResource(imgs.getResourceId(position, -1));
+        	imageView.setBackgroundResource(imgs.getResourceId(position, -1));
 	        if (checked[position]){
 	        	//rowView.setBackground(context.getResources().getDrawable(R.drawable.bg_drawer_selected));
 	        	rowView.setBackgroundResource(R.drawable.bg_drawer_selected);

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.BBsRs.Fragments.NewsFragment;
+import com.BBsRs.Fragments.QuestionsFragment;
 import com.BBsRs.astronews.MainActivity;
 import com.BBsRs.astronews.R;
 
@@ -81,6 +82,8 @@ public class MenuFragment extends ListFragment {
 		case 1:
 			newContent = new NewsFragment();
 			break;
+		case 2:
+			newContent = new QuestionsFragment();
 		}
 		if (newContent != null)
 			switchFragment(newContent, title);

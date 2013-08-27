@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_bg"
+    android:paddingBottom="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageSrc"
+        android:layout_marginLeft="5dp"
+        android:gravity="top|center_horizontal"
+        android:lines="5"
+        android:maxLines="5"
+        android:text="Планеты, вращающиеся вокруг холодных звезд"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/soft_black" />
+
+    <ImageView
+        android:id="@+id/imageSrc"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop"
+        android:src="#ccc" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_post_signature" />
+
+    <TextView
+        android:id="@+id/textAuo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_toRightOf="@+id/imageView1"
+        android:gravity="center"
+        android:text="DimitriyP"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#c3c5c7"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:src="@drawable/ic_post_btn_comment_up" />
+
+        <TextView
+            android:id="@+id/textCom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_alignBottom="@+id/imageView2"
+       		 android:layout_alignTop="@+id/imageView2"
+       		 android:layout_toRightOf="@+id/imageView2"
+            android:gravity="center"
+            android:text="65"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#c3c5c7"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:text="8.75"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#c3c5c7"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/textRate"
+        android:src="@drawable/ic_post_rating" />
+
+</RelativeLayout>

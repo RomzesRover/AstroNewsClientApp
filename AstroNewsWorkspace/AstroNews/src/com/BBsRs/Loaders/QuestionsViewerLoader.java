@@ -27,7 +27,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.RelativeLayout;
 
-import com.BBsRs.Adapters.NewsViewerAdapter;
+import com.BBsRs.Adapters.QuestionsViewerAdapter;
 import com.BBsRs.astronews.NewsBaseInfoArray;
 import com.BBsRs.astronews.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -42,9 +42,8 @@ public class QuestionsViewerLoader {
 	Thread thr;
 	View v;
 	Document doc;
-	NewsViewerAdapter feedAdapter; 
+	QuestionsViewerAdapter feedAdapter; 
 	final Handler handler = new Handler();
-	Boolean loadingMore=true;
 	RelativeLayout errLt;
 	int error=0;
 	
@@ -82,14 +81,14 @@ public class QuestionsViewerLoader {
 //	        	    PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, pauseOnScroll, pauseOnFling);
 //	        	    gridView.setOnScrollListener(listener);
 	        															//СЃРѕР·РґР°РµРј Р°РґР°РїС‚РµСЂ
-	        	feedAdapter = new NewsViewerAdapter(context, newsBaseInfoArray ,options, imageLoader);
+	        	feedAdapter = new QuestionsViewerAdapter(context, newsBaseInfoArray ,options, imageLoader);
 	        									
 	        	gridView.setAdapter(feedAdapter);						//СЃС‚Р°РІРёРј Р°РґР°РїС‚РµСЂ
 	        													
 	        	gridView.setOnScrollListener(new OnScrollListener(){	//РјРµС‚РѕРґ Рѕnscrool (Р»РѕРІРёРј РєРѕРіРґР° РїРѕР»СЊР·Р°РІР°С‚РµР»СЊ РїСЂРѕРєСЂСѓС‚РёР» СЃРїРёСЃРѕРє РґРѕ СЃР°РјРѕРіРѕ РЅРёР·Р°)
 	      			@Override
 	      			public void onScrollStateChanged(AbsListView view, int scrollState) {
-	      				switch (scrollState) {							//чтобы не лагало
+	      				switch (scrollState) {							//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	      				case OnScrollListener.SCROLL_STATE_IDLE:
 	      					imageLoader.resume();
 	      					break;
@@ -103,15 +102,7 @@ public class QuestionsViewerLoader {
 	      			}
 	      			@Override
 	      			public void onScroll(AbsListView view, int firstVisibleItem,
-	    				int visibleItemCount, int totalItemCount) {
-	      																//РґР°РЅРЅС‹Рµ РґР»СЏ РІС‹С‡РµСЃР»РµРЅРёСЏ
-	      				int lastInScreen = firstVisibleItem + visibleItemCount;				
-	      																//РµСЃР»Рё РїРѕР»СЊР·Р°РІР°С‚РµР»СЊ РґРѕРєСЂС‚СѓРёР» РґРѕ РЅРёР·Р°
-	      				if((lastInScreen == totalItemCount) && (loadingMore) && (!end)){	
-	      					pagePlusPlus();								//СѓРІРµР»РёС‡РёРІР°РµРј СЃС‚СЂР°РЅРёС†Сѓ РЅР° 1
-	      					LoadPageOfNews(page);						//Р·Р°РіСЂСѓР¶Р°РµРј СЃР»РµРґ СЃС‚СЂР°РЅРёС†Сѓ
-	      				}
-	      			}
+	    				int visibleItemCount, int totalItemCount) {}
 	      		});
 	        	
 	        	gridView.setOnItemClickListener(new OnItemClickListener(){
@@ -176,7 +167,7 @@ public class QuestionsViewerLoader {
 		
 		}
 	
-	public void end(){ //Конец кончились новости на сайте, не считая архив
+	public void end(){ //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		Log.d("End_FeedLoader", "StartLoadingFeed Page:"+String.valueOf(page));
 		final Runnable updater = new Runnable() {
 	    public void run() {
@@ -187,14 +178,14 @@ public class QuestionsViewerLoader {
 		handler.post(updater);
 	}
 	
-	public void Error(){ //Ошибка при загрузке
+	public void Error(){ //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		final Runnable updater = new Runnable() {
 	    public void run() {
 	    	error=1;
 	    	errLt.setVisibility(View.VISIBLE);
 	    	gridView.setVisibility(View.GONE);
 	    	progressBar.setVisibility(View.GONE);
-	    	//кнопка попробовать снова
+	    	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	    	Button retry = (Button)errLt.findViewById(R.id.retry);
 	    	retry.setOnClickListener(new View.OnClickListener() {
 	    		@Override
@@ -224,8 +215,7 @@ public class QuestionsViewerLoader {
 	}
 	
 	public void LoadPageOfNews(final int pageN){
-		loadingMore=false;
-		thr=new Thread(new Runnable() {				//Делаем в новом потоке
+		thr=new Thread(new Runnable() {				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	        public void run() {
 	        	try {
 	        		imageLoader.pause();			//pause to kill lags
@@ -233,35 +223,25 @@ public class QuestionsViewerLoader {
 	        		Log.i(LOG_TAG, "StartLoadingFeed Page:"+String.valueOf(pageN));
 	        		
 	        		sPref = context.getSharedPreferences("A", 1);
-					doc =  Jsoup.connect("http://www.astronews.ru/cgi-bin/mng.cgi?page=news&str="+String.valueOf(pageN+3))
+					doc =  Jsoup.connect("http://www.astronews.ru/cgi-bin/mng.cgi?page=question")
 								.userAgent(context.getResources().getString(R.string.user_agent))
 								.timeout(context.getResources().getInteger(R.integer.user_timeout))
 								//.cookie("remember", sPref.getString("remember", null))
 								.get();
 					
-					int k=0;
-					for (Element table : doc.select("table[bgcolor=C0C0C0]")) {
-					     for (Element row : table.select("tr[bgcolor=FFFFFF]")) {
-					        k++;
+					for (Element row : doc.select("table[bgcolor=FEFFD5]")) {
 					        newsBaseInfoArray.add(new NewsBaseInfoArray(
-					        		row.select("a[href]").get(1).text(),						//title
-					        		"http://www.astronews.ru/"+row.select("img").attr("src"),	//img
-					    			row.select("a[href]").last().text(),						//auo
-					    			row.select("b").get(row.select("b").size()-4).text(),		//com
-					    			row.select("b").last().text(),								//rate
-					    			row.select("a").attr("href")								//url
+					        		row.select("a[href]").get(1).text(),								//title
+					        		"http://www.astronews.ru/"+row.select("img").attr("src"),			//img
+					    			row.select("a[href]").get(row.select("a[href]").size()-2).text(),	//auo
+					    			row.select("b").get(row.select("b").size()-4).text(),				//com
+					    			row.select("b").last().text(),										//rate
+					    			row.select("a").attr("href")										//url
 					    			));
-					        
-					     }
 					}
-						if (pageN==1){
-						settingUpAdapter(true);}
-						else {settingUpAdapter(false);}
-						if (k<20 || k>20){
+						settingUpAdapter(true);
 			    		end();
-					}
 					imageLoader.resume();
-					loadingMore=true;
 				} catch (IOException e) {
 					Error();
 					Log.e(LOG_TAG, "Page: "+String.valueOf(pageN));

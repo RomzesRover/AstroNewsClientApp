@@ -28,6 +28,7 @@
 	<string  name="share">Share</string >
 
 	<string  name="replace_ru_one">Пользователь</string >
+	<string  name="replace_ru_two">- Вопросы по астрономии</string >
 	
 	<string-array name="MainSlidingMenuImgs">
         <item></item>

@@ -17,7 +17,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -109,17 +111,7 @@ public class QuestionsViewerLoader {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
-//						sPref = context.getSharedPreferences("A", 1);
-//						Editor ed = sPref.edit();   // ���� ������ �� ���������, ������ �� ��� ���� :)
-//						ed.putString("SimpleVideoAuthorsUploadViewes", newsBaseInfoArray.get(arg2).authorsUploadViewe);
-//						ed.putString("SimpleVideoImgsSrc", newsBaseInfoArray.get(arg2).imgSrc);
-//						ed.putString("SimpleVideoUrl", newsBaseInfoArray.get(arg2).url);
-//				        ed.putString("SimpleVideoName", newsBaseInfoArray.get(arg2).name);
-//				        ed.commit();
-////								Intent step1 = new Intent(context, SimpleVideoViewer.class);
-////								step1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-////								context.startActivity(step1);
-//				        context.startActivity(new Intent("com.BBsRs.clipiki.ru.SimpleVideoViewer", Uri.parse(newsBaseInfoArray.get(arg2).url)));
+				        context.startActivity(new Intent("com.BBsRs.astronews.SimpleQuestionViewerActivity", Uri.parse(newsBaseInfoArray.get(arg2).url)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 					}
 				});
 	        	
@@ -236,7 +228,7 @@ public class QuestionsViewerLoader {
 					    			row.select("a[href]").get(row.select("a[href]").size()-2).text(),	//auo
 					    			row.select("b").get(row.select("b").size()-4).text(),				//com
 					    			row.select("b").last().text(),										//rate
-					    			row.select("a").attr("href")										//url
+					    			"http://www.astronews.ru/cgi-bin/mng.cgi"+row.select("a").get(1).attr("href")										//url
 					    			));
 					}
 						settingUpAdapter(true);

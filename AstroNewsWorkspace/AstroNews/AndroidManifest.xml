@@ -17,6 +17,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Holo.Theme.Light.DarkActionBar" >
+        
         <activity
             android:name="com.BBsRs.astronews.LoaderActivity"
             android:label="@string/app_name" >
@@ -26,10 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="MainViewerActivity" >
-        </activity>
-        <activity android:name="SearchNewsActivity" >
-        </activity>
+        
+        <activity android:name="MainViewerActivity" ></activity>
+        <activity android:name="SearchNewsActivity" ></activity>
+        <activity android:name="MainActivity"></activity>
+        
         <activity android:name="SimpleNewsViewerActivity" >
             <intent-filter android:icon="@drawable/ic_launcher" >
                 <action android:name="com.BBsRs.astronews.SimpleNewsViewerActivity" />
@@ -41,6 +43,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
         <activity android:name="UserViewer" >
             <intent-filter android:icon="@drawable/ic_launcher" >
                 <action android:name="com.BBsRs.astronews.UserViewer" />
@@ -52,7 +55,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="MainActivity"></activity>
+        
+        <activity android:name="SimpleQuestionViewerActivity">
+            <intent-filter android:icon="@drawable/ic_launcher" >
+                <action android:name="com.BBsRs.astronews.SimpleQuestionViewerActivity" />
+
+                <data
+                    android:pathPattern="/cgi-bin/*"
+                    android:scheme="http" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

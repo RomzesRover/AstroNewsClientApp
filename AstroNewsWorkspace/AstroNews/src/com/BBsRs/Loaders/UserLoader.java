@@ -39,6 +39,7 @@ public class UserLoader {
 	RelativeLayout errLt;
 	int error=0;
 	ActionBar ab;
+	String LOG_TAG = "UserLoader";
 	
 	public UserLoader(Context context, TextView UserName, TextView UserInfo, ImageView avatarSrc,ProgressBar prBr, RelativeLayout RlLt,RelativeLayout errLt, ActionBar ab){
 		this.context=context;
@@ -150,7 +151,7 @@ public class UserLoader {
 		thr=new Thread(new Runnable() {				//������ � ����� ������
 	        public void run() {
 	        	try {
-	        		Log.i("UserLoader", "StartLoadUserPage: "+url);
+	        		Log.i(LOG_TAG, "StartLoadUserPage: "+url);
 	        		sPref = context.getSharedPreferences("A", 1);
 	        		doc =  Jsoup.connect(url)
 	        					.userAgent(context.getResources().getString(R.string.user_agent))
@@ -169,7 +170,7 @@ public class UserLoader {
 	        		int second = userInfo.indexOf("</tr>");
 	        		userInfo = userInfo.substring(0, first) + userInfo.substring(second, userInfo.length());
 	        		
-	        		Log.i("tag", userInfo +"\n"+"first="+String.valueOf(first)+" second:"+String.valueOf(second));
+	        		Log.i(LOG_TAG, userInfo +"\n"+"first="+String.valueOf(first)+" second:"+String.valueOf(second));
 	        		
 	        		userName = doc.select("h3[style=color : #006593;]").first().text().replaceAll(context.getResources().getString(R.string.replace_ru_one)+" ", "");
 	        		
@@ -177,9 +178,13 @@ public class UserLoader {
 	        		setupInfo();
 	        		
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					Error();
-					Log.e("UserLoader", "UserLoaderLoadingError: "+url);
+					Log.e(LOG_TAG, "Load Error"); Error(); 
+					e.printStackTrace();
+				} catch (NullPointerException e) {
+	        		Log.e(LOG_TAG, "null Load Error"); Error();
+					e.printStackTrace();
+				} catch (Exception e) {
+	        		Log.e(LOG_TAG, "other Load Error"); Error();
 					e.printStackTrace();
 				}
 	        }

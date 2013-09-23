@@ -97,7 +97,7 @@ public class SearchNewsLoader {
 	        	gridView.setOnScrollListener(new OnScrollListener(){	//РјРµС‚РѕРґ Рѕnscrool (Р»РѕРІРёРј РєРѕРіРґР° РїРѕР»СЊР·Р°РІР°С‚РµР»СЊ РїСЂРѕРєСЂСѓС‚РёР» СЃРїРёСЃРѕРє РґРѕ СЃР°РјРѕРіРѕ РЅРёР·Р°)
 	      			@Override
 	      			public void onScrollStateChanged(AbsListView view, int scrollState) {
-	      				switch (scrollState) {							//чтобы не лагало
+	      				switch (scrollState) {							//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	      				case OnScrollListener.SCROLL_STATE_IDLE:
 	      					imageLoader.resume();
 	      					break;
@@ -174,7 +174,7 @@ public class SearchNewsLoader {
 		
 		}
 	
-	public void end(){ //Конец кончились новости на сайте, не считая архив
+	public void end(){ //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		Log.d("End_FeedLoader", "StartLoadingFeed Page:"+String.valueOf(page));
 		final Runnable updater = new Runnable() {
 	    public void run() {
@@ -185,14 +185,14 @@ public class SearchNewsLoader {
 		handler.post(updater);
 	}
 	
-	public void Error(){ //Ошибка при загрузке
+	public void Error(){ //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		final Runnable updater = new Runnable() {
 	    public void run() {
 	    	error=1;
 	    	errLt.setVisibility(View.VISIBLE);
 	    	gridView.setVisibility(View.GONE);
 	    	progressBar.setVisibility(View.GONE);
-	    	//кнопка попробовать снова
+	    	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	    	Button retry = (Button)errLt.findViewById(R.id.retry);
 	    	retry.setOnClickListener(new View.OnClickListener() {
 	    		@Override
@@ -233,7 +233,7 @@ public class SearchNewsLoader {
 	
 	public void LoadPageOfNews(final int pageN){
 		loadingMore=false;
-		thr=new Thread(new Runnable() {				//Делаем в новом потоке
+		thr=new Thread(new Runnable() {				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	        public void run() {
 	        	try {
 	        		imageLoader.pause();			//pause to kill lags
@@ -270,13 +270,13 @@ public class SearchNewsLoader {
 					imageLoader.resume();
 					loadingMore=true;
 				} catch (IOException e) {
-					Error();
-					Log.e(LOG_TAG, "Page: "+String.valueOf(pageN));
+					Log.e(LOG_TAG, "Load Error"); Error(); 
 					e.printStackTrace();
-				}
-	        	  catch (Exception e) {
-					Error();
-					Log.e(LOG_TAG, "Page: "+String.valueOf(pageN));
+				} catch (NullPointerException e) {
+	        		Log.e(LOG_TAG, "null Load Error"); Error();
+					e.printStackTrace();
+				} catch (Exception e) {
+	        		Log.e(LOG_TAG, "other Load Error"); Error();
 					e.printStackTrace();
 				}
 	        }

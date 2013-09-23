@@ -235,8 +235,13 @@ public class QuestionsViewerLoader {
 			    		end();
 					imageLoader.resume();
 				} catch (IOException e) {
-					Error();
-					Log.e(LOG_TAG, "Page: "+String.valueOf(pageN));
+					Log.e(LOG_TAG, "Load Error"); Error(); 
+					e.printStackTrace();
+				} catch (NullPointerException e) {
+	        		Log.e(LOG_TAG, "null Load Error"); Error();
+					e.printStackTrace();
+				} catch (Exception e) {
+	        		Log.e(LOG_TAG, "other Load Error"); Error();
 					e.printStackTrace();
 				}
 	        }

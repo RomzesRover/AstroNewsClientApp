@@ -31,10 +31,6 @@ public class MainActivity extends SlidingFragmentActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		getWindow().setFlags(
-			    WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-			    WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
-		
 		final ActionBar ab = getSupportActionBar();
         ab.setLogo(getResources().getDrawable(R.drawable.ic_launcher));
         

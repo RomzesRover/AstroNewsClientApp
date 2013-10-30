@@ -36,7 +36,7 @@ public class UserViewer extends Activity {
 		RelativeLayout RlLt = (RelativeLayout)findViewById(R.id.UserRlLt);
 		
 		Uri data = getIntent().getData();
-		userName =  data.toString();
+		userName =  data.toString().replace("mng", "mngold");
 		ab.setTitle(getResources().getString(R.string.user));
 		
 		

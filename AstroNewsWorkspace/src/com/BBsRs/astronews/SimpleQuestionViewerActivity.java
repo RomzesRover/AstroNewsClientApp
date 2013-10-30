@@ -38,7 +38,7 @@ public class SimpleQuestionViewerActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    Uri data = getIntent().getData();										//intent data
-	    url = data.toString();
+	    url = data.toString().replace("mngold", "mng");
 	    setContentView(R.layout.activity_simple_news_viewer);
 	    final ActionBar ab = getSupportActionBar();
 	    ab.setDisplayHomeAsUpEnabled(true);										//back button

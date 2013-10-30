@@ -56,15 +56,14 @@ public class SearchNewsActivity extends Activity {
 		
 		ab.setTitle(getResources().getString(R.string.searchM)+ ": "+request);	//set title with search request;
 		
-		
 		options = new DisplayImageOptions.Builder()
         .showStubImage(R.drawable.ic_stub)
         //.showImageForEmptyUri(R.drawable.logo)
         .cacheOnDisc(true)	
-        .cacheInMemory(true)						//кешируем на флешке, нужно разрешение
+        .cacheInMemory(true)						//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         .build();
         
-		final RelativeLayout errLt = (RelativeLayout)findViewById(R.id.ErrorRelativeLayout); //для ошибок
+		final RelativeLayout errLt = (RelativeLayout)findViewById(R.id.ErrorRelativeLayout); //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         gridList = (GridView)findViewById(R.id.NewsGridView);
 	    progressBar = (ProgressBar)findViewById(R.id.NewsProgressBar);
 	    text = (TextView)findViewById(R.id.SearchN);

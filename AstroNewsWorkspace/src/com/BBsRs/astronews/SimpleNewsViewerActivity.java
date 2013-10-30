@@ -48,15 +48,15 @@ public class SimpleNewsViewerActivity extends Activity {
         .showStubImage(R.drawable.ic_stub)
         //.showImageForEmptyUri(R.drawable.logo)
         .cacheOnDisc(true)	
-        .cacheInMemory(true)						//кешируем на флешке, нужно разрешение
+        .cacheInMemory(true)						//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         .build();
         
-		final RelativeLayout errLt = (RelativeLayout)findViewById(R.id.ErrorRelativeLayout); //для ошибок
+		final RelativeLayout errLt = (RelativeLayout)findViewById(R.id.ErrorRelativeLayout); //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         listView = (ListView)findViewById(R.id.NewsListView);
 	    progressBar = (ProgressBar)findViewById(R.id.NewsProgressBar);
 	    simpleNewsViewerLoader = new SimpleNewsViewerLoader(getApplicationContext(), listView, progressBar, options,errLt,ab);
 	    
-	    if(savedInstanceState == null || !savedInstanceState.containsKey("commentsBaseInfoArray")) {
+	    if(savedInstanceState == null) {
 	    	simpleNewsViewerLoader.LoadSimpleNews(url);
 	    }
 	    else{
@@ -64,10 +64,7 @@ public class SimpleNewsViewerActivity extends Activity {
 	    	html=savedInstanceState.getString("html");
 	    	title=savedInstanceState.getString("title");
 	    	posX=savedInstanceState.getInt("posX");
-	    	if (!(commentsBaseInfoArray.size()<1))
-	    		simpleNewsViewerLoader.settingUpStringArray(commentsBaseInfoArray, html, title, posX);
-	    	else 
-	    		simpleNewsViewerLoader.LoadSimpleNews(url);	
+	    	simpleNewsViewerLoader.settingUpStringArray(commentsBaseInfoArray, html, title, posX);
 	    }
 	}
 	

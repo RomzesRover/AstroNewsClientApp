@@ -8,6 +8,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.BBsRs.Fragments.NewsFragment;
@@ -29,6 +30,10 @@ public class MainActivity extends SlidingFragmentActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		getWindow().setFlags(
+			    WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+			    WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 		
 		final ActionBar ab = getSupportActionBar();
         ab.setLogo(getResources().getDrawable(R.drawable.ic_launcher));

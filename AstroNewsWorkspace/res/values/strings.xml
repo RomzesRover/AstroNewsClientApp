@@ -24,7 +24,8 @@
 	</string-array>
 	<string name="user">User:</string>
 	<string  name="news">News:</string >
-	<string  name="commetns">Commetns:</string >
+	<string  name="question">Question:</string >
+	<string  name="commetns">Comments:</string >
 	<string  name="share">Share</string >
 
 	<string  name="replace_ru_one">Пользователь</string >

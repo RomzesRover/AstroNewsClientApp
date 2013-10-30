@@ -215,7 +215,7 @@ public class QuestionsViewerLoader {
 	        		Log.i(LOG_TAG, "StartLoadingFeed Page:"+String.valueOf(pageN));
 	        		
 	        		sPref = context.getSharedPreferences("A", 1);
-					doc =  Jsoup.connect("http://www.astronews.ru/cgi-bin/mng.cgi?page=question")
+					doc =  Jsoup.connect("http://www.astronews.ru/cgi-bin/mngold.cgi?page=question")
 								.userAgent(context.getResources().getString(R.string.user_agent))
 								.timeout(context.getResources().getInteger(R.integer.user_timeout))
 								//.cookie("remember", sPref.getString("remember", null))

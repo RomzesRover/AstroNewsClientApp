@@ -143,12 +143,14 @@ public class SimpleNewsViewerLoader {
 								//.cookie("remember", sPref.getString("remember", null))
 								.get();
 					
-					html = doc.select("table").get(5).child(0).child(0).html()
+					html = doc.select("div[style=width: 800px; display: inline-block; vertical-align: top; margin: 0 0 0 44px;]").first().select("td").get(1).html() +
+						   doc.select("div[style=width: 800px; display: inline-block; vertical-align: top; margin: 0 0 0 44px;]").first().select("td").get(2).html()
 							.replaceAll("/news/", "http://www.astronews.ru/news/")
-							.replaceAll("/foto/", "http://www.astronews.ru/foto/");
+							.replaceAll("/foto/", "http://www.astronews.ru/foto/")
+							.replaceAll("/img/", "http://www.astronews.ru/img/");
 					
 					try {
-						title = doc.select("h3[style=color : #006593;]").get(1).text();
+					title = doc.select("div[style=width: 800px; display: inline-block; vertical-align: top; margin: 0 0 0 44px;]").first().select("td").get(1).text();
 						} catch (Exception e) {
 							title=context.getResources().getString(R.string.app_name);
 							Log.e(LOG_TAG, "Page: "+url + " can't cut title");
@@ -169,13 +171,14 @@ public class SimpleNewsViewerLoader {
 						e.printStackTrace();
 					}
 					
-					for (Element table : doc.select("table[bgcolor=FEFFD5]")){
+					
+					for (Element table : doc.select("div[class=border_line][style=background: #fffbef; border: 1px solid #ccc; border-radius: 7px; padding: 20px; overflow: hidden;]")){
 						commentsBaseInfoArray.add(new CommentsBaseInfoArray(
-								table.getElementsByClass("comment").text(),			//comment
-								table.select("a").last().text(),					//auo
+								table.select("p[style=margin: 0;]").text(),			//comment
+								table.select("a").first().text(),					//auo
 								"http://www.astronews.ru/"+table.select("img").first().attr("src"),			//img
-								"http://www.astronews.ru/"+table.select("a").last().attr("href"),				//auo link
-								table.select("td[width=40][align=center]").text()	//rate2
+								"http://www.astronews.ru/"+table.select("a").first().attr("href"),				//auo link
+								table.select("span[style=float: right;]").last().child(1).text().replace(" ", "")	//rate2
 								));
 					}
 					

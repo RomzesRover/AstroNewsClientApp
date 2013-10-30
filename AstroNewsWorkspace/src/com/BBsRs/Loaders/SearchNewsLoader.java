@@ -238,7 +238,7 @@ public class SearchNewsLoader {
 	        	try {
 	        		imageLoader.pause();			//pause to kill lags
 	        		
-	        		Log.i(LOG_TAG, "StartLoadingFeed Page:"+String.valueOf(pageN));
+	        		Log.i(LOG_TAG, "StartLoadingSearch Page:"+String.valueOf(pageN));
 	        		
 	        		sPref = context.getSharedPreferences("A", 1);
 					doc =  Jsoup.connect("http://www.astronews.ru/cgi-bin/mng.cgi?page=find&find="+request+"&str="+String.valueOf(pageN))
@@ -248,20 +248,19 @@ public class SearchNewsLoader {
 								.get();
 					
 					int k=0;
-					for (Element table : doc.select("table[bgcolor=C0C0C0]")) {
-					     for (Element row : table.select("tr[bgcolor=FFFFFF]")) {
-					        k++;
-					        newsBaseInfoArray.add(new NewsBaseInfoArray(
-					        		row.select("a[href]").get(1).text(),						//title
-					        		"http://www.astronews.ru/"+row.select("img").attr("src"),	//img
-					    			row.select("a[href]").last().text(),						//auo
-					    			row.select("b").get(row.select("b").size()-4).text(),		//com
-					    			row.select("b").last().text(),								//rate
-					    			"http://www.astronews.ru"+row.select("a").attr("href")								//url
-					    			));
-					        
-					     }
-					}
+					for (Element row : doc.select("div[style=position: relative; width: 249px; float: left;]")) {
+						Element rowData = doc.select("div[style=display: inline-block; float: right]").get(k);
+						//Element row = table.select("tr[bgcolor=FFFFFF]").first();
+						k++;
+				        newsBaseInfoArray.add(new NewsBaseInfoArray(
+				        		row.select("img").attr("title"),						//title
+				        		"http://www.astronews.ru/"+row.select("img").attr("src"),	//img
+				    			rowData.select("a").text(),						//auo
+				    			rowData.select("span[style=margin-top: 4px; padding: 0 0 0 10px; display: inline-block; color: #5b5b5b;]").get(1).ownText().replace("[]", ""),		//com
+				    			rowData.select("span[style=margin-top: 4px; padding: 0 0 0 10px; display: inline-block; color: #5b5b5b;]").last().text(),	//rate							//rate
+				    			"http://www.astronews.ru/"+row.select("a").attr("href")								//url
+				    			));
+				}
 						if (pageN==1){
 						settingUpAdapter(true);}
 						else {settingUpAdapter(false);}

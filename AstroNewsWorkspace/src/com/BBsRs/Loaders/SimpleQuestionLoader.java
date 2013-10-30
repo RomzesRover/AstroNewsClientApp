@@ -88,9 +88,11 @@ public class SimpleQuestionLoader {
 		    public void run() {
 		    	
 		    	View headerView = inflater.inflate(R.layout.header_view_simple_news, null, false);	//setting up header view and update news text
+		    	TextView questTitle = (TextView)headerView.findViewById(R.id.textView1);
 		    	TextView TextView = (TextView)headerView.findViewById(R.id.newsContent);
 		    	Spanned text = Html.fromHtml (html,new URLImageParser(TextView, context), null);
 		    	TextView.setText(text);
+		    	questTitle.setText(context.getResources().getString(R.string.question));
 //		    	TextView.setMovementMethod(new LinkMovementMethod(){}.getInstance());
 		    	TextView.setLinksClickable(true);
 		    	TextView.setAutoLinkMask(Linkify.ALL); //to open links
@@ -143,15 +145,16 @@ public class SimpleQuestionLoader {
 								//.cookie("remember", sPref.getString("remember", null))
 								.get();
 					
-					html = "<h3 style=\"color : #006593;\">"+doc.title().replaceAll(context.getResources().getString(R.string.replace_ru_two), "")+"</h3>";
-					title = doc.title().replaceAll(context.getResources().getString(R.string.replace_ru_two), "");
-					for (Element table : doc.select("table[bgcolor=FEFFD5]")){
+					html = doc.select("div[style=color: #2b6989; margin: 10px 0 35 0px;]").html();
+					title = doc.select("div[style=color: #2b6989; margin: 10px 0 35 0px;]").text();
+					
+					for (Element table : doc.select("div[class=border_line][style=background: #fffbef; border: 1px solid #ccc; border-radius: 7px; padding: 20px; overflow: hidden;]")){
 						commentsBaseInfoArray.add(new CommentsBaseInfoArray(
-								table.getElementsByClass("comment").text(),			//comment
-								table.select("a").last().text(),					//auo
+								table.select("p[style=margin: 0;]").text(),			//comment
+								table.select("a").first().text(),					//auo
 								"http://www.astronews.ru/"+table.select("img").first().attr("src"),			//img
-								"http://www.astronews.ru/"+table.select("a").last().attr("href"),				//auo link
-								table.select("td[width=40][align=center]").text()	//rate2
+								"http://www.astronews.ru/"+table.select("a").first().attr("href"),				//auo link
+								table.select("span[style=float: right;]").last().child(1).text().replace(" ", "")	//rate2
 								));
 					}
 					
